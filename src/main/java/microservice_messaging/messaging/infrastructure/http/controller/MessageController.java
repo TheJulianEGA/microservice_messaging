@@ -10,6 +10,7 @@ import microservice_messaging.messaging.application.dto.MessageRequest;
 import microservice_messaging.messaging.application.dto.MessageResponse;
 import microservice_messaging.messaging.application.handler.handler.IMessageHandler;
 import microservice_messaging.messaging.infrastructure.util.InfrastructureConstants;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/whatsapp")
 @RequiredArgsConstructor
-public class WhatsAppController {
+public class MessageController {
 
     private final IMessageHandler messageHandler;
 
@@ -35,9 +36,10 @@ public class WhatsAppController {
                     content = @Content(mediaType = "application/json"))
     })
     @PreAuthorize(InfrastructureConstants.ROLE_EMPLOYEE)
-    @PostMapping("/send")
+    @PostMapping(value = "/send", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MessageResponse> sendWhatsAppMessage(@RequestBody MessageRequest request) {
         MessageResponse response = messageHandler.sendWhatsAppMessage(request);
         return ResponseEntity.ok(response);
     }
 }
+

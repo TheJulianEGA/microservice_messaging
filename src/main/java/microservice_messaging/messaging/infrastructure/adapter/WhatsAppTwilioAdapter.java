@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Value;
 import com.twilio.type.PhoneNumber;
 import org.springframework.stereotype.Service;
 
-
 @Service
 @RequiredArgsConstructor
 public class WhatsAppTwilioAdapter implements IWhatsAppTwilioPort {
