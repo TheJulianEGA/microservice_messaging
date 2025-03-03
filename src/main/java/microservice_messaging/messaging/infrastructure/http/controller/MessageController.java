@@ -35,7 +35,7 @@ public class MessageController {
             @ApiResponse(responseCode = "403", description = "Access denied - only employees can send messages",
                     content = @Content(mediaType = "application/json"))
     })
-    @PreAuthorize(InfrastructureConstants.ROLE_EMPLOYEE)
+    @PreAuthorize(InfrastructureConstants.ROLE_EMPLOYEE + " or " + InfrastructureConstants.ROLE_CUSTOMER)
     @PostMapping(value = "/send", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MessageResponse> sendWhatsAppMessage(@RequestBody MessageRequest request) {
         MessageResponse response = messageHandler.sendWhatsAppMessage(request);
